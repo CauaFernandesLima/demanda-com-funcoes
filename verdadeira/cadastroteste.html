@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #703C98;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Permite a rolagem se o conteúdo for maior */
+            box-sizing: border-box;
+        }
+
+        form {
+            width: auto;
+            max-width: 500px;
+            background-color: #C39BD3;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            color: #000000;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #000000;
+            font-size: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #000000;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #5D6D7E;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        select {
+            background-color: #C39BD3;
+        }
+
+        input[type="submit"] {
+            background-color: #180623;
+            color: #C39BD3;
+            border: none;
+            padding: 15px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #7e8d85;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group select {
+            padding: 12px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: -15px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="cadastro-form">
+        <header>
+            <h1>Crie seu Cadastro!</h1>
+            <p>Preencha o formulário abaixo para se cadastrar em nosso site.</p>
+        </header>
+
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+
+        <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmar-senha">Confirmar Senha:</label>
+            <input type="password" id="confirmar-senha" name="confirmar-senha" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="PIS">Número PIS:</label>
+            <input type="text" id="PIS" name="PIS" required>
+        </div>
+
+        <div class="form-group">
+            <label for="CPF">Número CPF:</label>
+            <input type="text" id="CPF" name="CPF" required>
+        </div>
+
+        <div class="form-group">
+            <label for="CEP">Número CEP:</label>
+            <input type="text" id="CEP" name="CEP" required>
+            <div id="cep-error" class="error-message"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="cadastro-tipo">Cadastro como:</label>
+            <select id="cadastro-tipo" name="cadastro-tipo" required>
+                <option value="cliente">Cliente</option>
+                <option value="entregador">Entregador</option>
+            </select>
+        </div>
+
+        <div id="motoboy-fields" style="display: none;">
+            <div class="form-group">
+                <label for="veiculo">Veículo:</label>
+                <select id="veiculo" name="veiculo" required>
+                    <option value="">Selecione...</option>
+                    <option value="moto">Moto</option>
+                    <option value="bicicleta">Bicicleta</option>
+                    <option value="carro">Carro</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="placa">Placa do Veículo (Se tiver):</label>
+                <input type="text" id="placa" name="placa">
+            </div>
+
+            <div class="form-group">
+                <label for="cidade">Cidade de Atuação:</label>
+                <input type="text" id="cidade" name="cidade" required>
+            </div>
+
+            <div class="form-group">
+                <label for="foto">Foto de perfil 3x4:</label>
+                <input type="file" id="foto" name="foto" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Cadastrar">
+        </div>
+    </form>
+
+    
+
+    <script>
+        document.getElementById('cadastro-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Clear previous errors
+            const errorElements = document.querySelectorAll('.error-message');
+            errorElements.forEach(el => el.style.display = 'none');
+
+            const nome = document.getElementById('nome');
+            const senha = document.getElementById('senha');
+            const confirmarSenha = document.getElementById('confirmar-senha');
+            const email = document.getElementById('email');
+            const cpf = document.getElementById('CPF');
+            let formIsValid = true;
+
+            // Validação do nome completo
+            if (!/^\S+\s+\S+$/.test(nome.value.trim())) {
+                document.getElementById('nome-error').style.display = 'block';
+                formIsValid = false;
+            }
+
+            // Validação da senha
+            const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!senhaRegex.test(senha.value.trim())) {
+                document.getElementById('senha-error').style.display = 'block';
+                formIsValid = false;
+            }
+
+            // Validação da confirmação da senha
+            if (senha.value !== confirmarSenha.value) {
+                document.getElementById('confirmar-senha-error').style.display = 'block';
+                formIsValid = false;
+            }
+
+            // Validação do e-mail
+            if (!/\S+@\S+\.\S+/.test(email.value.trim())) {
+                document.getElementById('email-error').style.display = 'block';
+                formIsValid = false;
+            }
+
+            // Validação do CPF
+            function isValidCPF(cpf) {
+                cpf = cpf.replace(/\D/g, '');
+                if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+                let sum = 0, remainder;
+                for (let i = 1; i <= 9; i++) sum += parseInt(cpf.charAt(i - 1)) * (11 - i);
+                remainder = (sum * 10) % 11;
+                if ((remainder === 10) || (remainder === 11)) remainder = 0;
+                if (remainder !== parseInt(cpf.charAt(9))) return false;
+                sum = 0;
+                for (let i = 1; i <= 10; i++) sum += parseInt(cpf.charAt(i - 1)) * (12 - i);
+                remainder = (sum * 10) % 11;
+                if ((remainder === 10) || (remainder === 11)) remainder = 0;
+                return remainder === parseInt(cpf.charAt(10));
+            }
+            if (!isValidCPF(cpf.value.trim())) {
+                document.getElementById('cpf-error').style.display = 'block';
+                formIsValid = false;
+            }
+
+            // Exibição dos campos específicos para entregador
+            const cadastroTipo = document.getElementById('cadastro-tipo').value;
+            document.getElementById('motoboy-fields').style.display = cadastroTipo === 'entregador' ? 'block' : 'none';
+
+            if (formIsValid) {
+                // Redireciona para a página index2.html
+                window.location.href = 'index2.html';
+            }
+        });
+    </script>
+
+</body >
+
+
+</html >
+
+
+    
